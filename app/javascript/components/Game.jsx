@@ -7,7 +7,8 @@ class Game extends Component {
         this.state = {
             game: {},
             pick: [],
-            pickAlreadyMade: false
+            pickAlreadyMade: false,
+            gameHasEnded: false
         }
     }
 
@@ -15,13 +16,15 @@ class Game extends Component {
         if (this.props.isLoggedIn) {
             axios.get(`/api/v1/game/${this.props.match.params.id}`).then(response => {
                 let game = response.data.game.results[0];
-                this.setState({game: game})
+                this.setState({game: game});
                 if (response.data.pickAlreadyMade) {
-                    this.setState({pickAlreadyMade: true})
+                    this.setState({pickAlreadyMade: true});
+                } else if (game.status == "final") {
+                    this.setState({gameHasEnded: true});
                 }
             })
         } else {
-            this.props.history.push('/')
+            this.props.history.push('/');
         }
     }
 
@@ -52,13 +55,14 @@ class Game extends Component {
             <div className="container" style={{maxWidth: "600px", marginTop: "200px"}}>
                 <div className="jumbotron">
                     {this.state.pickAlreadyMade && <h2>You've already selected a team.</h2>}
+                    {this.state.gameHasEnded && <h2>This game has ended.</h2>}
                     <h1 className="display-4">{game.summary}</h1>
                     <p className="lead">{game.details.league}</p>
                     <hr className="my-4" />
                     <p>{game.odds && game.odds[0].spread.current.home} Home | {game.odds && game.odds[0].spread.current.away} Away</p>
                     <p className="lead">
-                        <button className="btn btn-primary btn-lg" disabled={this.state.pickAlreadyMade} style={{marginRight: "20px"}} onClick={() => this.selectTeam(game, "Home")} role="button">Select Home</button>
-                        <button className="btn btn-primary btn-lg" disabled={this.state.pickAlreadyMade} onClick={() => this.selectTeam(game, "Away")} role="button">Select Away</button>
+                        <button className="btn btn-primary btn-lg" disabled={this.state.pickAlreadyMade || this.state.gameHasEnded} style={{marginRight: "20px"}} onClick={() => this.selectTeam(game, "Home")} role="button">Select Home</button>
+                        <button className="btn btn-primary btn-lg" disabled={this.state.pickAlreadyMade || this.state.gameHasEnded} onClick={() => this.selectTeam(game, "Away")} role="button">Select Away</button>
                     </p>
                 </div>
             </div>
