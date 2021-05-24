@@ -1,24 +1,23 @@
-# README
+# Sports Picks
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The application was built with a Ruby on Rails API and React Frontend. It uses the Sportspage Feeds API offered by rapidapi.com.
 
-Things you may want to cover:
+Application deployed to heroku: [https://sports-picks-2021.herokuapp.com](https://sports-picks-2021.herokuapp.com)
 
-* Ruby version
+Key features:
 
-* System dependencies
+* User authentication with signup and login (includes error handling)
 
-* Configuration
+* Ability to view sports games and select a winning team
 
-* Database creation
+* Prevent user from making a pick on the same game twice
 
-* Database initialization
+* Prevent user from making a pick on a game that has ended
 
-* How to run the test suite
+Future features:
 
-* Services (job queues, cache servers, search engines, etc.)
+* Consider migrating to MongoDB as document model is more flexible to a changing API
 
-* Deployment instructions
+* Tally points for users winning picks
 
-* ...
+* Add backend and frontend unit testing
