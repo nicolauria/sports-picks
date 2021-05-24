@@ -5,6 +5,7 @@ import Home from "../components/Home";
 import Games from "../components/Games";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
+import Game from "../components/Game";
 
 class App extends Component {
     constructor(props) {
@@ -45,6 +46,7 @@ class App extends Component {
                    <Route exact path="/games" render={props => (<Games {...props} isLoggedIn={this.state.isLoggedIn} />)} />
                    <Route exact path="/login" render={props => (<Login {...props} handleLogin={this.handleLogin} />)} />
                    <Route exact path="/signup" render={props => (<Signup {...props} handleLogin={this.handleLogin} />)} />
+                   <Route exact path="/game/:id" render={props => (<Game {...props} isLoggedIn={this.state.isLoggedIn} />)} />
                </Switch>
            </Router>
         </div>

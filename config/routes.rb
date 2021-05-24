@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'signup', to: 'users#create'
       post 'login', to: 'users#signin'
+      get 'games', to: 'games#games'
+      get 'game/:id', to: 'games#game'
     end
   end
   
