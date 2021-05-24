@@ -23,13 +23,13 @@ class Games extends Component {
 
     render() {
         const games = this.state.games.map(game => (
-            <div class="card text-center" style={{marginBottom: "50px"}}>
+            <div class="card text-center" style={{maxWidth: "800px", margin: "0 auto", marginBottom: "50px"}}>
                 <div class="card-header">
                     {game.summary}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{game.details.league}</h5>
-                    <p class="card-text">{game.odds[0].spread.current.home} Home | {game.odds[0].spread.current.away} Away</p>
+                    <p class="card-text">{game.odds && game.odds[0].spread.current.home} Home | {game.odds && game.odds[0].spread.current.away} Away</p>
                     <Link to={`/game/${game.gameId}`} className="btn btn-primary">View Game</Link>
                 </div>
                 <div class="card-footer text-muted">
@@ -37,7 +37,13 @@ class Games extends Component {
                 </div>
             </div>
         ))
-        console.log(this.state.games[0])
+
+        if (games.length < 1) {
+            return (
+                <p>Loading...</p>
+            )
+        }
+        
         return (
             <>
                 <h1 style={{textAlign: "center"}}>Games</h1>

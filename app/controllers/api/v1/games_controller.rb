@@ -4,6 +4,7 @@ class Api::V1::GamesController < ApplicationController
     require 'openssl'
     
     def games
+        puts "hit games#games"
         url = URI("https://sportspage-feeds.p.rapidapi.com/games")
 
         http = Net::HTTP.new(url.host, url.port)
@@ -32,6 +33,13 @@ class Api::V1::GamesController < ApplicationController
 
         response = http.request(request)
         game = response.read_body
-        render json: JSON.parse(game)
+
+        # check to see if pick has already been made
+        @pick = Pick.find_by game_id: params[:id], user_email: current_user.email
+        if @pick
+            render json: {pickAlreadyMade: true, game: JSON.parse(game)}
+        else
+            render json: {game: JSON.parse(game)}
+        end
     end
 end

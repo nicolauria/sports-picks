@@ -21,9 +21,13 @@ export default (props) => (
                 <li className="nav-item">
                     <Link to="/signup" className="nav-link">Signup</Link>
                 </li></>}
-                {props.loggedIn && <li className="nav-item">
-                    <button onClick={props.logout}>Logout</button>
-                </li>}
+                {props.loggedIn && <>
+                <li className="nav-item">
+                    <Link to="/picks" className="nav-link">Picks</Link>
+                </li>
+                <li className="nav-item">
+                    <button onClick={props.logout} style={{marginTop: "5px"}}>Logout</button>
+                </li></>}
             </ul>
         </div>
     </nav>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default () => (
+export default (props) => (
   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
     <div className="jumbotron jumbotron-fluid bg-transparent">
       <div className="container secondary-color">
@@ -17,7 +17,8 @@ export default () => (
         >
           View Games
         </Link>
-        <Link
+        {!props.isLoggedIn && <>
+          <Link
           to="/login"
           className="btn btn-lg custom-button home-btn"
           role="button"
@@ -31,6 +32,7 @@ export default () => (
         >
           Signup
         </Link>
+        </>}
       </div>
     </div>
   </div>

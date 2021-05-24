@@ -6,6 +6,7 @@ import Games from "../components/Games";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Game from "../components/Game";
+import Picks from "../components/Picks"
 
 class App extends Component {
     constructor(props) {
@@ -18,10 +19,10 @@ class App extends Component {
        };
     }
     
-    handleLogin = (user) => {
+    handleLogin = (response) => {
         this.setState({
             isLoggedIn: true,
-            email: user.email
+            email: response.data.email
         })
         localStorage.setItem('state', JSON.stringify(this.state));
         window.location.href = "/games";
@@ -42,11 +43,12 @@ class App extends Component {
            <Router>
                <NavBar loggedIn={this.state.isLoggedIn} logout={this.logout} />
                <Switch>
-                   <Route exact path="/" component={Home} />
+                   <Route exact path="/" render={props => (<Home {...props} isLoggedIn={this.state.isLoggedIn} />)} />
                    <Route exact path="/games" render={props => (<Games {...props} isLoggedIn={this.state.isLoggedIn} />)} />
                    <Route exact path="/login" render={props => (<Login {...props} handleLogin={this.handleLogin} />)} />
                    <Route exact path="/signup" render={props => (<Signup {...props} handleLogin={this.handleLogin} />)} />
-                   <Route exact path="/game/:id" render={props => (<Game {...props} isLoggedIn={this.state.isLoggedIn} />)} />
+                   <Route exact path="/game/:id" render={props => (<Game {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email} />)} />
+                   <Route exact path="/picks" render={props => (<Picks {...props} isLoggedIn={this.state.isLoggedIn} />)} />
                </Switch>
            </Router>
         </div>

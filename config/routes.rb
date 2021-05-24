@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       post 'login', to: 'users#signin'
       get 'games', to: 'games#games'
       get 'game/:id', to: 'games#game'
+      post 'picks', to: 'picks#create'
+      get 'picks', to: 'picks#index'
+      patch 'pick', to: 'picks#update'
     end
   end
   
