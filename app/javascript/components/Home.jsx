@@ -7,15 +7,29 @@ export default () => (
       <div className="container secondary-color">
         <h1 className="display-4">Sports Picks</h1>
         <p className="lead">
-          Find sports games to make picks on!
+          Find sports games to make picks on! You must be logged in to view games.
         </p>
         <hr className="my-4" />
         <Link
           to="/games"
-          className="btn btn-lg custom-button"
+          className="btn btn-lg custom-button home-btn"
           role="button"
         >
           View Games
+        </Link>
+        <Link
+          to="/login"
+          className="btn btn-lg custom-button home-btn"
+          role="button"
+        >
+          Login
+        </Link>
+        <Link
+          to="/signup"
+          className="btn btn-lg custom-button"
+          role="button"
+        >
+          Signup
         </Link>
       </div>
     </div>
