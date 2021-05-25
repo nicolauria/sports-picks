@@ -12,7 +12,6 @@ class Picks extends Component {
     componentDidMount() {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1/picks").then(response => {
-                console.log(response.data);
                 this.setState({picks: response.data});
             })
         } else {
@@ -48,8 +47,8 @@ class Picks extends Component {
                         <p class="card-text">Home Odds: {pick.home_odds} | Away Odds: {pick.away_odds}</p>
                     </div>
                     <div class="card-footer text-muted">
-                    You selected: {pick.home_or_away}<br />
-                    Winning team: {pick.winning_team}
+                        You selected: {pick.home_or_away}<br />
+                        Winning team: {pick.winning_team}
                     </div>
                 </div>
         )}  )

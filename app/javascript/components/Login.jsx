@@ -21,20 +21,6 @@ class Login extends Component {
         const {email, password} = this.state;
         let user = {email, password};
         
-        // fetch("/api/v1/login", {
-        //     method: 'POST',
-        //     headers:  {
-        //       "Content-Type": "application/json",
-        //       "Accept": "application/json"
-        //     },
-        //     body: JSON.stringify(user)
-        // })
-        // .then(response => response.json())
-        // .then(result => {
-        //     console.log(result);
-        //     // this.props.handleLogin(result)
-        // })
-        // .catch(err => this.setState({errors: err}))
         axios.post("/api/v1/login", user).then(result => {
             this.props.handleLogin(result);
         }).catch(err => {
@@ -50,12 +36,27 @@ class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <input type="email" 
+                               name="email" 
+                               className="form-control" 
+                               id="exampleInputEmail1" 
+                               aria-describedby="emailHelp" 
+                               placeholder="Enter email" 
+                               onChange={this.handleChange}
+                        />
+                        <small id="emailHelp" className="form-text text-muted">
+                            We'll never share your email with anyone else.
+                        </small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
+                        <input type="password" 
+                               name="password" 
+                               className="form-control" 
+                               id="exampleInputPassword1" 
+                               placeholder="Password" 
+                               onChange={this.handleChange} 
+                        />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
