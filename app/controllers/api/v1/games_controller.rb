@@ -3,8 +3,8 @@ class Api::V1::GamesController < ApplicationController
     require 'net/http'
     require 'openssl'
     
-    def games
-        puts "hit games#games"
+    def index
+        # retreive all games
         url = URI("https://sportspage-feeds.p.rapidapi.com/games")
 
         http = Net::HTTP.new(url.host, url.port)
@@ -20,7 +20,8 @@ class Api::V1::GamesController < ApplicationController
         render json: JSON.parse(games)
     end
 
-    def game
+    def show
+        # retrieve a game
         url = URI("https://sportspage-feeds.p.rapidapi.com/gameById?gameId=#{params[:id]}")
 
         http = Net::HTTP.new(url.host, url.port)
