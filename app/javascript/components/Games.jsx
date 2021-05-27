@@ -13,7 +13,9 @@ class Games extends Component {
     componentDidMount() {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1/games").then(response => {
-                let games = response.data.results;
+                let games = response.data.results.filter(game => {
+                    return game.status != "final"
+                })
                 this.setState({games: games})
             })
         } else {
